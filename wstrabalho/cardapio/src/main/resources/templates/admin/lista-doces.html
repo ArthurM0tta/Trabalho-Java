@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Bolos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            font-weight: 700;
+            color: #4a4a4a;
+        }
+
+        .top-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .top-buttons a {
+            background-color: #6a9fdb;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(106, 159, 219, 0.4);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+        }
+
+        .top-buttons a:hover {
+            background-color: #4c7ac9;
+            box-shadow: 0 6px 15px rgba(76, 122, 201, 0.6);
+        }
+
+        ul.doce-list {
+            list-style: none;
+            padding: 0;
+            width: 380px;
+            max-width: 90vw;
+        }
+
+        ul.doce-list li {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            padding: 20px 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        ul.doce-list li span.nome-preco {
+            flex: 1;
+        }
+
+        ul.doce-list li span.actions a {
+            margin-left: 18px;
+            color: #3178c6;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 2px solid #3178c6;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        ul.doce-list li span.actions a:hover {
+            background-color: #3178c6;
+            color: white;
+        }
+
+        ul.doce-list li span.actions a.excluir {
+            border-color: #e04f4f;
+            color: #e04f4f;
+        }
+
+        ul.doce-list li span.actions a.excluir:hover {
+            background-color: #e04f4f;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerenciar Bolos</h1>
+    
+    <div class="top-buttons">
+        <a href="/admin/dashboard">Voltar ao Dashboard</a>
+        <a href="/admin/doces/novo">Novo Doce</a>
+    </div>
+
+    <ul class="doce-list">
+        <li th:each="doce : ${doces}">
+            <span class="nome-preco" >
+                <span th:text="${doce.nome}">Nome do Doce</span> - R$ <span th:text="${doce.preco}">Preço</span>
+            </span>
+            <span class="actions">
+                <a th:href="@{/admin/doces/editar/{id}(id=${doce.id})}">Editar</a>
+                <a class="excluir" th:href="@{/admin/doces/excluir/{id}(id=${doce.id})}">Excluir</a>
+            </span>
+        </li>
+    </ul>
+</body>
+</html>

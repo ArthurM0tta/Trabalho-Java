@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Meus Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even){
+            background-color: #f2f2f2;
+        }
+        .no-pedidos {
+            margin-top: 20px;
+            color: #555;
+            font-style: italic;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn-voltar {
+            margin-top: 20px;
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn-voltar:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Meus Pedidos</h1>
+
+<div th:if="${#lists.isEmpty(pedidos)}" class="no-pedidos">
+    Você ainda não fez nenhum pedido.
+</div>
+
+<table th:if="${!#lists.isEmpty(pedidos)}">
+    <thead>
+        <tr>
+            <th>ID do Pedido</th>
+            <th>Itens</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}">1</td>
+            <td>
+                <ul>
+                    <li th:each="item : ${pedido.itens}" th:text="${item}">Doce - Tamanho</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a href="/pedido" class="btn-voltar">Fazer novo pedido</a>
+
+</body>
+</html>

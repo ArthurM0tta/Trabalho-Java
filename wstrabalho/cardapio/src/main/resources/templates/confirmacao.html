@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação do Pedido</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h2 th:text="${mensagem}">Mensagem</h2>
+
+<div th:if="${itens != null}">
+    <h3>Itens escolhidos:</h3>
+    <ul>
+        <li th:each="item : ${itens}" th:text="${item}">Item</li>
+    </ul>
+</div>
+
+<p style="text-align: center; margin-top: 20px;">
+    <a th:href="@{/pedido}">Voltar para o pedido</a>
+    |
+    <a th:href="@{/logout}">Sair</a>
+</p>
+</body>
+</html>

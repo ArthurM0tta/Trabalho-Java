@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fazer Pedido</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Monte seu Pedido</h1>
+
+<form method="post" th:action="@{/pedido}">
+    <div class="menu">
+        <div class="item" th:each="doce, iterStat : ${doces}">
+            <h2 th:text="${doce.nome}">Nome</h2>
+            <p th:text="${doce.descricao}">Descrição</p>
+            <p><strong th:text="'R$ ' + ${doce.preco}">Preço</strong></p>
+
+            <label>
+                <input type="checkbox" name="itens" th:value="${doce.nome}"> Adicionar
+            </label>
+
+            <label>
+                Tamanho:
+                <select name="tamanhos" required>
+                    <option value="Pequeno">Pequeno</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Grande">Grande</option>
+                </select>
+            </label>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <button type="submit">Finalizar Pedido</button>
+    </div>
+</form>
+
+<p style="text-align: center; margin-top: 20px;">
+    <a th:href="@{/logout}">Sair</a>
+</p>
+</body>
+</html>

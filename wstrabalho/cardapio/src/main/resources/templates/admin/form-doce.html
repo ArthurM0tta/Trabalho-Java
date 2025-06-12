@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Doce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #28a745;
+            border: none;
+            padding: 12px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1 th:text="${doce.id} != null ? 'Editar Doce' : 'Novo Doce'"></h1>
+
+<form th:action="@{/admin/doces/salvar}" th:object="${doce}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" th:field="*{nome}" placeholder="Nome do doce" required />
+
+    <label for="descricao">Descrição</label>
+    <input type="text" id="descricao" th:field="*{descricao}" placeholder="Descrição" required />
+
+    <label for="preco">Preço</label>
+    <input type="number" id="preco" th:field="*{preco}" step="0.01" placeholder="Preço" required />
+
+    <button type="submit" th:text="${doce.id} != null ? 'Atualizar' : 'Salvar'"></button>
+</form>
+
+<a href="/admin/doces">Voltar para lista de doces</a>
+</body>
+</html>
